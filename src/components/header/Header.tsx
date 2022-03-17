@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ActionButton, concatStyleSets, concatStyleSetsWithProps, DefaultPalette, FontWeights, IButtonStyles, Icon, IconButton, IIconProps, IStackItemStyles, IStackStyles, IStackTokens, ITextStyles, mergeStyles, mergeStyleSets, Stack, Text } from '@fluentui/react';
 import React from 'react';
 import { useStyletron } from 'styletron-react';
@@ -92,5 +93,12 @@ export const Header: React.FunctionComponent = () => {
                 </Stack.Item>
             </Stack>
         </header>
+=======
+import React from 'react';
+
+export const Header: React.FunctionComponent = () => {
+    return (
+        <h1>Page Header</h1>
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
     );
 };

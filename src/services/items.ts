@@ -1,4 +1,19 @@
+<<<<<<< HEAD
 import { IDocument, IGetDocumentsResponse } from "../types/responses";
+=======
+export interface IDocument {
+    key: string;
+    name: string;
+    value: string;
+    iconName: string;
+    fileType: string;
+    modifiedBy: string;
+    dateModified: string;
+    dateModifiedValue: number;
+    fileSize: string;
+    fileSizeRaw: number;
+}
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
 
 function _generateDocuments() {
     const items: IDocument[] = [];
@@ -105,6 +120,21 @@ function sort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T
 
 const allDocuments = _generateDocuments();
 
+<<<<<<< HEAD
+=======
+export interface IGetDocumentsRequest {
+    skip: number;
+    take: number;
+    columnKey: string;
+    isSortedDescending?: boolean;
+}
+
+export interface IGetDocumentsResponse {
+    totalItems: number;
+    documents: IDocument[];
+}
+
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
 export const loadDocuments = (
     skip: number,
     take: number,
@@ -114,6 +144,7 @@ export const loadDocuments = (
     return new Promise<IGetDocumentsResponse>((resolve, reject) => {        
         setTimeout(() => {
           resolve({
+<<<<<<< HEAD
               page: take / (take - skip),
               rowsPerPage: take - skip,
               totalItems: allDocuments.length,
@@ -131,4 +162,11 @@ export const loadPersonalContent = (
     isSortedDescending?: boolean
 ) => {
     
+=======
+              totalItems: allDocuments.length,
+              documents: sort(allDocuments.slice(skip, take), columnKey, isSortedDescending),
+          });
+        }, 500);
+      });
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
 }

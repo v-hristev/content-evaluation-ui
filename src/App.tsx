@@ -11,7 +11,10 @@ import PersonalPage from './routes/personal/Personal';
 import { WaitingApprovalPage } from './routes/waiting-approval/WaitingApproval';
 import { Nav } from './components/navigation/Nav';
 import { Header } from './components/header/Header';
+<<<<<<< HEAD
 import { useStyletron } from 'styletron-react';
+=======
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
 
 const boldStyle: Partial<ITextStyles> = { root: { fontWeight: FontWeights.semibold } };
 const stackTokens: IStackTokens = {
@@ -55,6 +58,7 @@ export const App: React.FunctionComponent = () => {
     //   </Stack>
     // </Stack>
     <div className="App">
+<<<<<<< HEAD
       {/* <Stack horizontalAlign="center" verticalAlign="center" verticalFill styles={stackStyles} tokens={stackTokens}> */}
         <Header />
         <Routes>
@@ -64,6 +68,21 @@ export const App: React.FunctionComponent = () => {
           <Route path="approved/:id" element={<ApprovedPage />} />
         </Routes>
       {/* </Stack> */}
+=======
+        <Header />
+        <Nav />
+        <div>
+          <Text variant="large">
+            Page Content
+          </Text>
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="personal/:id" element={<PersonalPage />} />
+            <Route path="waiting-approval/:id" element={<WaitingApprovalPage />} />
+            <Route path="approved/:id" element={<ApprovedPage />} />
+          </Routes>
+        </div>
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
     </div>
   );
 };

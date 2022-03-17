@@ -1,10 +1,15 @@
 import { IColumn, mergeStyleSets, Spinner, SpinnerSize, TooltipHost } from '@fluentui/react';
 import React, { createContext, useEffect, useReducer, useState } from 'react';
 import { Table } from '../../components/table/Table';
+<<<<<<< HEAD
 import { DefaultPagination } from '../../config';
 import { personalContentReducer } from '../../reducers/personal-content-reducer';
 import { loadDocuments } from '../../services/items';
 import { IDocument, IGetDocumentsResponse } from '../../types/responses';
+=======
+import { personalContentReducer } from '../../reducers/personal-content-reducer';
+import { IDocument, IGetDocumentsResponse, loadDocuments } from '../../services/items';
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
 
 const classNames = mergeStyleSets({
     fileIconHeaderIcon: {
@@ -45,15 +50,24 @@ const classNames = mergeStyleSets({
 
 export interface IPersonalPageProps {
     loading: boolean;
+<<<<<<< HEAD
     items: IDocument[];
     page: number;
     rowsPerPage: number;
+=======
+    items: any[];
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
     totalItems: number;
 }
 
 export const PersonalPage = (props: IPersonalPageProps) => {
+<<<<<<< HEAD
     const [page, setPage] = useState(props.page);
     const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage);
+=======
+    const [page, setPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
     const [loading, setLoading] = useState(props.loading);
     const [items, setItems] = useState<any[]>(props.items);
     const [sort, setSort] = useState({
@@ -65,7 +79,12 @@ export const PersonalPage = (props: IPersonalPageProps) => {
         try {
             setLoading(true);
             const skip = (page - 1) * rowsPerPage;
+<<<<<<< HEAD
             const { documents } = await loadDocuments(skip, rowsPerPage, columnKey, isSortedDescending);
+=======
+            const take = skip + rowsPerPage;
+            const {documents} = await loadDocuments(skip, take, columnKey, isSortedDescending);
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
             setItems(documents);
         } finally {
             setLoading(false);
@@ -205,10 +224,17 @@ export const PersonalPage = (props: IPersonalPageProps) => {
 
 const PersonalPageContainer = () => {
     const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
     const [response, setResponse] = useState<IGetDocumentsResponse>();
 
     useEffect(() => {
         loadDocuments(0, DefaultPagination.rowsPerPage, "name", false)
+=======
+    const [response, setResponse] = useState<IGetDocumentsResponse | undefined>();
+
+    useEffect(() => {
+        loadDocuments(0, 10, "name", false)
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
             .then((resp: IGetDocumentsResponse) => {
                 setResponse(resp);
                 setLoading(false);
@@ -218,6 +244,7 @@ const PersonalPageContainer = () => {
     return (
         <>
             {loading && <Spinner size={SpinnerSize.large} />}
+<<<<<<< HEAD
             {
                 !loading && 
                 <PersonalPage 
@@ -228,6 +255,9 @@ const PersonalPageContainer = () => {
                     rowsPerPage={response?.rowsPerPage || DefaultPagination.rowsPerPage}
                 />
             }
+=======
+            {!loading && <PersonalPage loading={loading} items={response?.documents || []} totalItems={response?.totalItems || 0} />}
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
         </>
     )
 };
@@ -237,7 +267,11 @@ export const PersonalContentContext = createContext<any>({});
 
 export const PersonalContentContextProvider = (): JSX.Element => {
     const [state, dispatch] = useReducer(personalContentReducer, {});
+<<<<<<< HEAD
     const value = { state, dispatch };
+=======
+    const value = {state, dispatch};
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
 
     return (
         <PersonalContentContext.Provider value={value}>

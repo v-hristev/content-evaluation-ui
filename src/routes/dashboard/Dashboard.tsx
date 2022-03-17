@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { FontWeights, IStackTokens, ITextStyles, Stack, Text } from '@fluentui/react';
 import { Nav } from '../../components/navigation/Nav';
 import { useStyletron } from 'styletron-react';
@@ -30,5 +31,11 @@ export const DashboardPage: React.FunctionComponent = () => {
                 <p>Calendar</p>
             </Stack.Item>
         </Stack>
+=======
+
+export const DashboardPage: React.FunctionComponent = () => {
+    return (
+        <h1>Dashboard</h1>
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
     );
 };

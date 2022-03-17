@@ -22,10 +22,17 @@ const chevronRightIcon: IIconProps = { iconName: 'ChevronRight' };
 
 const buttonStyles: IButtonStyles = {
     root: {
+<<<<<<< HEAD
         backgroundColor: 'inherit'
     },
     rootDisabled: {
         backgroundColor: 'inherit'
+=======
+    backgroundColor: 'inherit'
+    },
+    rootDisabled: {
+    backgroundColor: 'inherit'
+>>>>>>> 842101f51d4ca87515b9939876c250368780164c
     }
 }
 
