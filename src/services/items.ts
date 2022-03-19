@@ -1,3 +1,4 @@
+import { IFilteredField } from "../types/requests";
 import { IDocument, IGetDocumentsResponse } from "../types/responses";
 
 function _generateDocuments() {
@@ -98,9 +99,36 @@ function _lorem(wordCount: number): string {
     return LOREM_IPSUM.slice(startIndex, loremIndex).join(' ');
 }
 
-function sort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {
+function sort<T>(items: T[], columnKey: string, isSortedDescending: boolean | null): T[] {
     const key = columnKey as keyof T;
     return items.sort((a: T, b: T) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
+}
+
+function filterBy<T>(item: T, {name, value}: IFilteredField) {
+    const key = name as keyof T;
+    const fieldValue = item[key];
+
+    switch (typeof fieldValue) {
+        case "boolean":
+        case "number":
+            return fieldValue === +value;
+        case "string":
+            return fieldValue.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        default:
+            return false
+    }
+}
+
+function filter<T>(items: T[], filters: IFilteredField[]): T[] {
+    if (filters.length === 0) return items;
+
+    return items.filter(x => {
+        let cond = true;
+        filters.forEach((filter) => {
+            cond &&= filterBy(x, filter);
+        });
+        return cond;
+    });
 }
 
 const allDocuments = _generateDocuments();
@@ -108,16 +136,21 @@ const allDocuments = _generateDocuments();
 export const loadDocuments = (
     skip: number,
     take: number,
-    columnKey: string,
-    isSortedDescending?: boolean,
+    filters: IFilteredField[],
+    sortField: string,
+    isSortedDescending: boolean | null,
 ): Promise<IGetDocumentsResponse> => {
-    return new Promise<IGetDocumentsResponse>((resolve, reject) => {        
+    return new Promise<IGetDocumentsResponse>((resolve, reject) => {
+        const filteredItems = filter(allDocuments, filters);
+        
         setTimeout(() => {
           resolve({
               page: take / (take - skip),
               rowsPerPage: take - skip,
-              totalItems: allDocuments.length,
-              documents: sort(allDocuments.slice(skip, skip + take), columnKey, isSortedDescending),
+              totalItems: filteredItems.length,
+              documents: isSortedDescending !== null
+                ? sort(filteredItems.slice(skip, skip + take), sortField, isSortedDescending)
+                : filteredItems.slice(skip, skip + take),
           });
         }, 500);
       });

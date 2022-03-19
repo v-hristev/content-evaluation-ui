@@ -1,4 +1,12 @@
-import { DetailsList, DetailsListLayoutMode, DetailsRow, IColumn, IDetailsRowCheckStyles, SelectionMode } from '@fluentui/react';
+import React from "react";
+import {
+  DetailsList,
+  DetailsListLayoutMode,
+  DetailsRow,
+  IColumn,
+  IDetailsRowCheckStyles,
+  SelectionMode
+} from '@fluentui/react';
 import { IPaginationProps, Pagination } from './Pagination';
 
 export interface ITableProps<T> {

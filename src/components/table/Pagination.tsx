@@ -1,5 +1,13 @@
-import { Dropdown, IButtonStyles, IconButton, IDropdownOption, IDropdownStyles, IIconProps } from '@fluentui/react';
 import React from 'react';
+import {
+    Dropdown,
+    Text,
+    IButtonStyles,
+    IconButton,
+    IDropdownOption,
+    IDropdownStyles,
+    IIconProps
+} from '@fluentui/react';
 import { paginationRange } from '../../utils/helpers';
 
 const dropdownControlledExampleOptions: IDropdownOption[] = [
@@ -54,8 +62,6 @@ export const Pagination = ({
     };
 
     const [from, to] = paginationRange(page, totalItems, rowsPerPage);
-
-    console.log(from, to, page, totalItems, rowsPerPage);
     
     return (
     <div style={{display: 'flex'}}>
@@ -69,11 +75,11 @@ export const Pagination = ({
             dropdownWidth="auto"
             styles={dropdownStyles}
         />
-        <p style={{
+        <Text style={{
             lineHeight: "32px",
             fontSize: "14px",
             margin: "0 20px"
-        }}>{from}-{to}</p>
+        }}>{from}-{to} of {totalItems} items</Text>
         <IconButton iconProps={chevronLeftIcon} title="Left Icon" ariaLabel="LeftIcon" disabled={page <= 1} checked={false} styles={buttonStyles} onClick={onPrevPageClick} />
         <IconButton iconProps={chevronRightIcon} title="Right Icon" ariaLabel="RightIcon" disabled={to >= totalItems} checked={false} styles={buttonStyles} onClick={onNextPageClick} />
     </div>
