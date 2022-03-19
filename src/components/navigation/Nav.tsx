@@ -18,20 +18,23 @@ const containerStyles: StyleObject = {
     margin: 0,
 };
 
+const commonContentStyles: StyleObject = {
+    padding: "5px",
+    borderBottomWidth: "3px",
+    borderBottomStyle: "solid",
+    borderBottomColor: DefaultPalette.white,
+}
+
 const personalContentStyles: StyleObject = {
+    ...commonContentStyles,
     background: DefaultPalette.themePrimary,
     color: DefaultPalette.white,
-    padding: "5px",
-    borderBottom: "3px solid",
-    borderBottomColor: DefaultPalette.white,
 };
 
 const waitingApprovalContentStyles: StyleObject = {
+    ...commonContentStyles,
     background: DefaultPalette.themeLight,
     color: DefaultPalette.black,
-    padding: "5px",
-    borderBottom: "3px solid",
-    borderBottomColor: DefaultPalette.white,
 };
 
 const approvedContentStyles: StyleObject = {
