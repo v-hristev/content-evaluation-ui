@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { DefaultPalette } from "@fluentui/react";
 import { styled, StyleObject, useStyletron } from "styletron-react";
+import { Link } from "react-router-dom";
 
 const StyledLink = styled(
     Link, 
-    { 
+    {
         textDecoration: "none",
         color: DefaultPalette.white,
     }
@@ -50,13 +50,13 @@ export const Nav: React.FunctionComponent = () => {
         <nav className={css({width: "150px"})}>
             <ul className={css(containerStyles)}>
                 <li className={css(personalContentStyles)}>                    
-                    <StyledLink to="/personal/1">Моето съдържание</StyledLink>
+                    <StyledLink to="/personal">Моето съдържание</StyledLink>
                 </li>
                 <li className={css(waitingApprovalContentStyles)}>
-                    <StyledLink className={css({color: DefaultPalette.black})} to="/waiting-approval/1">ДОС за оценка</StyledLink>
+                    <StyledLink className={css({color: DefaultPalette.black})} to="/waiting-approvals">ДОС за оценка</StyledLink>
                 </li>
                 <li className={css(approvedContentStyles)}>
-                    <StyledLink className={css({color: DefaultPalette.black})} to="/approved/1">Одобрени ДОС</StyledLink>
+                    <StyledLink className={css({color: DefaultPalette.black})} to="/approved">Одобрени ДОС</StyledLink>
                 </li>
             </ul>
         </nav>
