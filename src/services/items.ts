@@ -1,4 +1,3 @@
-import { resolve } from "path";
 import { IFilteredField } from "../types/requests";
 import { IDocument, IGetDocumentsResponse } from "../types/responses";
 
@@ -166,7 +165,7 @@ export const loadPersonalContent = (): Promise<any> => {
                 {id: 3, text: "Урок 3: Уеб сайтове (8 клас)"},
                 {id: 4, text: "Урок 4: Електронен магазин (11 клас)"},
             ]);
-        });
+        }, 500);
     });
 }
 
@@ -177,7 +176,7 @@ export const loadWaitingApprovalsContent = (): Promise<any> => {
                 {id: 1, text: "Примерни тестове по български език и литература за външно оценяване и прием в гимназия 7. клас"},
                 {id: 2, text: "Български език за 10. клас + приложение с тестове (по новата програма)"},
             ]);
-        })
+        }, 2000);
     });
 }
 
@@ -188,6 +187,6 @@ export const loadApprovedContent = (): Promise<any> => {
                 {id: 1, text: "Примерни тестове по български език и литература за външно оценяване и прием в гимназия 7. клас"},
                 {id: 2, text: "Български език за 10. клас + приложение с тестове (по новата програма)"},
             ]);
-        })
+        }, 1000);
     });
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IColumn, mergeStyleSets, Spinner, SpinnerSize, TooltipHost } from '@fluentui/react';
+import { IColumn, mergeStyleSets, TooltipHost } from '@fluentui/react';
 import { ColumnHeader } from '../../components/table/ColumnHeader';
 import { Table } from '../../components/table/Table';
 import { DefaultPagination } from '../../config';
@@ -212,39 +212,37 @@ export const PersonalPage = () => {
     ];
 
     return (
-        <>
-            {loading && <Spinner size={SpinnerSize.large} />}
-            {!loading && <Table
-                columns={columns}
-                items={response.items}
-                isCompactMode={false}
-                pagination={{
-                    page: params.page,
-                    totalItems: response.totalItems,
-                    rowsPerPage: params.rowsPerPage,
-                    onPrevPageClick: async function (): Promise<void> {
-                        if (params.page > 1) {
-                            setParams({
-                                ...params,
-                                page: params.page - 1,
-                            });
-                        }
-                    },
-                    onNextPageClick: async function (): Promise<void> {
+        <Table
+            columns={columns}
+            items={response.items}
+            isCompactMode={false}
+            loading={loading}
+            pagination={{
+                page: params.page,
+                totalItems: response.totalItems,
+                rowsPerPage: params.rowsPerPage,
+                onPrevPageClick: async function (): Promise<void> {
+                    if (params.page > 1) {
                         setParams({
                             ...params,
-                            page: params.page + 1,
+                            page: params.page - 1,
                         });
-                    },
-                    onRowsPerPageClick: async function (rows: number): Promise<void> {
-                        setParams({
-                            ...params,
-                            page: 1,
-                            rowsPerPage: rows,
-                        });
-                    },
-                }}
-            />}
-        </>
+                    }
+                },
+                onNextPageClick: async function (): Promise<void> {
+                    setParams({
+                        ...params,
+                        page: params.page + 1,
+                    });
+                },
+                onRowsPerPageClick: async function (rows: number): Promise<void> {
+                    setParams({
+                        ...params,
+                        page: 1,
+                        rowsPerPage: rows,
+                    });
+                },
+            }}
+        />
     );
 };

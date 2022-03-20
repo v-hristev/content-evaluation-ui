@@ -1,6 +1,22 @@
-import { ActionButton, concatStyleSets, concatStyleSetsWithProps, DefaultPalette, FontWeights, IButtonStyles, Icon, IconButton, IIconProps, IStackItemStyles, IStackStyles, IStackTokens, ITextStyles, mergeStyles, mergeStyleSets, Stack, Text } from '@fluentui/react';
 import React from 'react';
-import { useStyletron } from 'styletron-react';
+import { styled, useStyletron } from 'styletron-react';
+import { Link } from 'react-router-dom';
+import { useBoolean, useId } from '@fluentui/react-hooks';
+import { UserInformationCallout } from './UserInformation';
+import { NotificationsCallout } from './Notifications';
+import {
+    ActionButton,
+    DefaultPalette,
+    FontWeights,
+    IButtonStyles,
+    IIconProps,
+    IStackItemStyles,
+    IStackStyles,
+    IStackTokens,
+    ITextStyles,
+    Stack,
+    Text
+} from '@fluentui/react';
 
 const boldStyle: Partial<ITextStyles> = {
     root: {
@@ -70,24 +86,39 @@ const mailIconStyles: IButtonStyles = {
     }
 };
 
+const StyledLink = styled(
+    Link,
+    {
+        textDecoration: "none",
+    }
+);
+
 export const Header: React.FunctionComponent = () => {
     const [css] = useStyletron();
+    const [isUserCalloutVisible, { toggle: toggleIsUserCalloutVisible }] = useBoolean(false);
+    const [isNotificationsCalloutVisible, { toggle: toggleIsNotificationsCalloutVisible }] = useBoolean(false);
+    const notificationsButtonId = useId('notifications-button');
+    const userButtonId = useId('user-button');
 
     return (
-        <header className={css({marginBottom: "20px"})}>
+        <header className={css({ marginBottom: "20px" })}>
             <Stack horizontal styles={stackStyles} tokens={stackTokens}>
                 <Stack.Item grow={3} styles={titleStyles}>
-                    <Text variant="large" styles={boldStyle}>
-                        Единна елетронна платформа за образователни услуги и съдържание
-                    </Text>
+                    <StyledLink to="/">
+                        <Text variant="large" styles={boldStyle}>
+                            Единна елетронна платформа за образователни услуги и съдържание
+                        </Text>
+                    </StyledLink>
                 </Stack.Item>
                 <Stack.Item grow styles={userInfoStyles}>
                     <Stack.Item grow styles={userInfoStyles}>
                         <Text variant="large" styles={boldStyle}>Иван Иванов</Text>
                     </Stack.Item>
                     <Stack.Item grow styles={userInfoStyles}>
-                        <ActionButton iconProps={mailIcon} allowDisabledFocus disabled={false} checked={false} styles={mailIconStyles} />
-                        <ActionButton iconProps={accountManagementIcon} allowDisabledFocus disabled={false} checked={false} styles={buttonStyles} />
+                        <ActionButton id={notificationsButtonId} iconProps={mailIcon} styles={mailIconStyles} onClick={toggleIsNotificationsCalloutVisible} />
+                        {isNotificationsCalloutVisible && <NotificationsCallout id={notificationsButtonId} toggleCallout={toggleIsNotificationsCalloutVisible} />}
+                        <ActionButton id={userButtonId} iconProps={accountManagementIcon} styles={buttonStyles} onClick={toggleIsUserCalloutVisible} />
+                        {isUserCalloutVisible && <UserInformationCallout id={userButtonId} toggleCallout={toggleIsUserCalloutVisible} />}
                     </Stack.Item>
                 </Stack.Item>
             </Stack>
