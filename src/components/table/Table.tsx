@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  DetailsList,
   DetailsListLayoutMode,
   DetailsRow,
   IColumn,
   IDetailsRowCheckStyles,
-  SelectionMode
+  SelectionMode,
+  ShimmeredDetailsList
 } from '@fluentui/react';
 import { IPaginationProps, Pagination } from './Pagination';
 
@@ -13,6 +13,7 @@ export interface ITableProps<T> {
     columns: IColumn[];
     items: T[];
     isCompactMode: boolean;
+    loading: boolean;
     pagination: IPaginationProps;
 }
 
@@ -33,6 +34,7 @@ export function Table<T>({
     columns,
     items,
     isCompactMode,
+    loading,
     pagination: {
         page,
         rowsPerPage,
@@ -43,13 +45,14 @@ export function Table<T>({
     }
 }: ITableProps<T>) {    
     return (
-        <DetailsList
+        <ShimmeredDetailsList
           items={items}
           compact={isCompactMode}
           columns={columns}
           selectionMode={SelectionMode.none}
           layoutMode={DetailsListLayoutMode.justified}
           isHeaderVisible={true}
+          enableShimmer={loading}
           onRenderDetailsFooter={() => (
             <DetailsRow
               columns={[

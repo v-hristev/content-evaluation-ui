@@ -8,7 +8,7 @@ export interface ICalendarProps {
 }
 
 interface ICalendarState {
-    startDate: Date;
+    startDate: Date | null;
     endDate: Date | null;
 }
 
@@ -18,7 +18,7 @@ export const Calendar = ({
     onChange
 }: ICalendarProps) => {
     const [calendarDates, setCalendarDates] = useState<ICalendarState>({
-        startDate: start || new Date(),
+        startDate: start || null,
         endDate: end || null,
     });
     
