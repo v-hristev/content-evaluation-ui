@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { IFilteredField } from "../types/requests";
 import { IDocument, IGetDocumentsResponse } from "../types/responses";
 
@@ -156,12 +157,37 @@ export const loadDocuments = (
       });
 }
 
-export const loadPersonalContent = (
-    id: number, 
-    skip: number,
-    take: number,
-    columnKey: string,
-    isSortedDescending?: boolean
-) => {
-    
+export const loadPersonalContent = (): Promise<any> => {
+    return new Promise<any[]>((resolve, reject) => {
+        setTimeout(() => {
+            resolve([
+                {id: 1, text: "Урок 1: Електронни таблици (10 клас)"},
+                {id: 2, text: "Урок 2: Презентации (9 клас)"},
+                {id: 3, text: "Урок 3: Уеб сайтове (8 клас)"},
+                {id: 4, text: "Урок 4: Електронен магазин (11 клас)"},
+            ]);
+        });
+    });
+}
+
+export const loadWaitingApprovalsContent = (): Promise<any> => {
+    return new Promise<any[]>((resolve, reject) => {
+        setTimeout(() => {
+            resolve([
+                {id: 1, text: "Примерни тестове по български език и литература за външно оценяване и прием в гимназия 7. клас"},
+                {id: 2, text: "Български език за 10. клас + приложение с тестове (по новата програма)"},
+            ]);
+        })
+    });
+}
+
+export const loadApprovedContent = (): Promise<any> => {
+    return new Promise<any[]>((resolve, reject) => {
+        setTimeout(() => {
+            resolve([
+                {id: 1, text: "Примерни тестове по български език и литература за външно оценяване и прием в гимназия 7. клас"},
+                {id: 2, text: "Български език за 10. клас + приложение с тестове (по новата програма)"},
+            ]);
+        })
+    });
 }
